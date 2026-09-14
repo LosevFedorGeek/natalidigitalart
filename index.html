@@ -1,8 +1,11 @@
 <!doctype html>
-<html lang="ru">
+<html lang="ru" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=5.0"
+    />
     <title>Наталья Кочуланова — Комплексный дизайн для бизнеса</title>
     <meta
       name="description"
@@ -22,31 +25,104 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23141517'/><path d='M8 22V10h2.4l5.6 8.2V10H18v12h-2.2L10.2 13.6V22H8z' fill='%23F8F6F2'/><path d='M20 10v12h2v-4.5l3.2 4.5h2.6l-3.8-5.2 3.5-4.8H25l-3 4.2V10h-2z' fill='%23C5A880'/></svg>"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23121316'/><path d='M8 22V10h2.4l5.6 8.2V10H18v12h-2.2L10.2 13.6V22H8z' fill='%23F8F6F2'/><path d='M20 10v12h2v-4.5l3.2 4.5h2.6l-3.8-5.2 3.5-4.8H25l-3 4.2V10h-2z' fill='%237D8597'/></svg>"
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Forum&family=Inter:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Forum&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+    <div class="ambient-glow" id="ambient-glow"></div>
+
     <header class="header">
       <div class="container header__container">
-        <a href="#" class="header__logo">Наталья Кочуланова</a>
+        <a href="#" class="header__logo" data-i18n="author_name"
+          >Наталья Кочуланова</a
+        >
 
         <nav class="header__nav js-nav">
           <ul class="header__menu">
-            <li><a href="#services" class="header__link">Услуги</a></li>
-            <li><a href="#portfolio" class="header__link">Портфолио</a></li>
-            <li><a href="#about" class="header__link">Опыт</a></li>
-            <li><a href="#contacts" class="header__link">Контакты</a></li>
+            <li>
+              <a href="#services" class="header__link" data-i18n="nav_services"
+                >Услуги</a
+              >
+            </li>
+            <li>
+              <a
+                href="#portfolio"
+                class="header__link"
+                data-i18n="nav_portfolio"
+                >Портфолио</a
+              >
+            </li>
+            <li>
+              <a href="#about" class="header__link" data-i18n="nav_about"
+                >Опыт</a
+              >
+            </li>
+            <li>
+              <a href="#contacts" class="header__link" data-i18n="nav_contacts"
+                >Контакты</a
+              >
+            </li>
           </ul>
+
+          <div class="header__mobile-controls">
+            <div class="lang-switch">
+              <button type="button" class="lang-btn is-active" data-lang="ru">
+                RU
+              </button>
+              <span class="lang-divider">/</span>
+              <button type="button" class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <button
+              type="button"
+              class="theme-toggle js-theme-toggle"
+              aria-label="Сменить тему"
+            >
+              <svg
+                class="theme-icon theme-icon--sun"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+              <svg
+                class="theme-icon theme-icon--moon"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
           <button class="btn btn--primary header__mobile-btn js-open-modal">
-            <span>Обсудить проект</span>
+            <span data-i18n="btn_discuss">Обсудить проект</span>
             <svg
               class="btn__arrow"
               width="15"
@@ -55,8 +131,6 @@
               fill="none"
               stroke="currentColor"
               stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
             >
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
@@ -64,21 +138,69 @@
           </button>
         </nav>
 
-        <button
-          class="btn btn--outline header__btn js-open-modal"
-          data-magnetic
-        >
-          Связаться
-        </button>
+        <div class="header__actions">
+          <div class="lang-switch header__desktop-control">
+            <button type="button" class="lang-btn is-active" data-lang="ru">
+              RU
+            </button>
+            <span class="lang-divider">/</span>
+            <button type="button" class="lang-btn" data-lang="en">EN</button>
+          </div>
 
-        <button
-          class="burger-btn js-burger"
-          aria-label="Открыть меню"
-          aria-expanded="false"
-        >
-          <span></span>
-          <span></span>
-        </button>
+          <button
+            type="button"
+            class="theme-toggle header__desktop-control js-theme-toggle"
+            aria-label="Сменить тему"
+          >
+            <svg
+              class="theme-icon theme-icon--sun"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg
+              class="theme-icon theme-icon--moon"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+
+          <button
+            class="btn btn--outline header__btn js-open-modal"
+            data-magnetic
+            data-i18n="btn_contact"
+          >
+            Связаться
+          </button>
+
+          <button
+            class="burger-btn js-burger"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+          >
+            <span></span>
+            <span></span>
+          </button>
+        </div>
       </div>
     </header>
 
@@ -86,18 +208,20 @@
       <section class="hero">
         <div class="container hero__container">
           <div class="hero__content reveal">
-            <span class="hero__badge">UI/UX & GRAPHIC DESIGNER</span>
-            <h1 class="hero__title">
+            <span class="hero__badge"
+              ><span class="badge-dot"></span>UI/UX & GRAPHIC DESIGNER</span
+            >
+            <h1 class="hero__title" data-i18n="hero_title">
               Комплексный дизайн для бизнеса: от айдентики до сайтов
             </h1>
-            <p class="hero__subtitle">
+            <p class="hero__subtitle" data-i18n="hero_subtitle">
               20+ лет практики, академическая художественная школа и точная
               допечатная подготовка. Создаю визуальные решения, которые помогают
               брендам говорить на языке премиального минимализма.
             </p>
             <div class="hero__actions">
               <button class="btn btn--primary js-open-modal" data-magnetic>
-                <span>Обсудить проект</span>
+                <span data-i18n="btn_discuss">Обсудить проект</span>
                 <svg
                   class="btn__arrow"
                   width="16"
@@ -106,14 +230,17 @@
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
                 >
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
               </button>
-              <a href="#portfolio" class="btn btn--outline" data-magnetic>
+              <a
+                href="#portfolio"
+                class="btn btn--outline"
+                data-magnetic
+                data-i18n="btn_portfolio"
+              >
                 Портфолио
               </a>
             </div>
@@ -258,8 +385,10 @@
       <section class="services" id="services">
         <div class="container">
           <div class="services__header reveal">
-            <h2 class="section-title">Услуги и специализация</h2>
-            <p class="section-subtitle">
+            <h2 class="section-title" data-i18n="services_title">
+              Услуги и специализация
+            </h2>
+            <p class="section-subtitle" data-i18n="services_subtitle">
               Многолетний опыт в различных областях визуального дизайна
               позволяет решать задачи любой сложности под ключ.
             </p>
@@ -276,8 +405,6 @@
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                   >
                     <path
                       d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
@@ -288,7 +415,7 @@
                 </div>
               </div>
               <h3 class="service-card__title">Digital & Web</h3>
-              <p class="service-card__text">
+              <p class="service-card__text" data-i18n="service_1_text">
                 Проектирование и разработка сайтов, многостраничных лендингов на
                 Tilda, адаптивный дизайн для идеального отображения на всех
                 устройствах.
@@ -306,8 +433,6 @@
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                   >
                     <path
                       d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
@@ -317,8 +442,10 @@
                   </svg>
                 </div>
               </div>
-              <h3 class="service-card__title">Брендинг & Айдентика</h3>
-              <p class="service-card__text">
+              <h3 class="service-card__title" data-i18n="service_2_title">
+                Брендинг & Айдентика
+              </h3>
+              <p class="service-card__text" data-i18n="service_2_text">
                 Разработка уникальных логотипов, создание фирменного стиля,
                 констант бренда и эстетичного визуала для социальных сетей.
               </p>
@@ -335,8 +462,6 @@
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                   >
                     <path
                       d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
@@ -346,8 +471,10 @@
                   </svg>
                 </div>
               </div>
-              <h3 class="service-card__title">Презентации & Инфографика</h3>
-              <p class="service-card__text">
+              <h3 class="service-card__title" data-i18n="service_3_title">
+                Презентации & Инфографика
+              </h3>
+              <p class="service-card__text" data-i18n="service_3_text">
                 Профессиональные питч-деки, презентации для инвесторов и
                 партнёров, а также инфографика и карточки для маркетплейсов.
               </p>
@@ -364,8 +491,6 @@
                     fill="none"
                     stroke="currentColor"
                     stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
                   >
                     <path
                       d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
@@ -375,8 +500,10 @@
                   </svg>
                 </div>
               </div>
-              <h3 class="service-card__title">Полиграфия & Prepress</h3>
-              <p class="service-card__text">
+              <h3 class="service-card__title" data-i18n="service_4_title">
+                Полиграфия & Prepress
+              </h3>
+              <p class="service-card__text" data-i18n="service_4_text">
                 Дизайн печатной продукции и материалов для бизнеса. Точная
                 допечатная подготовка макетов под стандарты и спецификации
                 типографий.
@@ -389,9 +516,11 @@
       <section class="portfolio" id="portfolio">
         <div class="container">
           <div class="portfolio__header reveal">
-            <div>
-              <h2 class="section-title">Избранные работы</h2>
-              <p class="section-subtitle">
+            <div class="portfolio__heading">
+              <h2 class="section-title" data-i18n="portfolio_title">
+                Избранные работы
+              </h2>
+              <p class="section-subtitle" data-i18n="portfolio_subtitle">
                 Проекты на стыке чистого искусства, современных медиатехнологий
                 и практической пользы для коммерческих клиентов.
               </p>
@@ -400,14 +529,20 @@
               href="https://disk.yandex.ru/d/Xmg36txc8Z6pYA"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn--outline"
+              class="btn btn--outline portfolio__btn"
               data-magnetic
+              data-i18n="btn_see_all"
             >
               Смотреть все
             </a>
           </div>
           <div class="portfolio__grid">
-            <div class="project-card reveal tilt-target">
+            <a
+              href="https://www.behance.net/gallery/255481181/dizajn-lendinga-dlja-stroitelnoj-kompanii"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card reveal tilt-target"
+            >
               <div class="project-card__image-box">
                 <img
                   src="stroi-alliance.jpg"
@@ -418,13 +553,18 @@
               </div>
               <div class="project-card__content">
                 <h3 class="project-card__title">СТРОЙ-АЛЬЯНС</h3>
-                <p class="project-card__desc">
+                <p class="project-card__desc" data-i18n="proj_1_desc">
                   Премиальный сайт строительной компании
                 </p>
               </div>
-            </div>
+            </a>
 
-            <div class="project-card reveal tilt-target">
+            <a
+              href="https://www.behance.net/gallery/244099707/VESTIS-E-commerce-Website-Design"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card reveal tilt-target"
+            >
               <div class="project-card__image-box">
                 <img
                   src="vestis.jpg"
@@ -435,13 +575,18 @@
               </div>
               <div class="project-card__content">
                 <h3 class="project-card__title">VESTIS</h3>
-                <p class="project-card__desc">
+                <p class="project-card__desc" data-i18n="proj_2_desc">
                   Концепт e-commerce магазина одежды
                 </p>
               </div>
-            </div>
+            </a>
 
-            <div class="project-card reveal tilt-target">
+            <a
+              href="https://www.behance.net/gallery/255492371/ARILS-Beauty-Brand-Identity-Social-Media-Banners"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card reveal tilt-target"
+            >
               <div class="project-card__image-box">
                 <img
                   src="arils.jpg"
@@ -452,13 +597,18 @@
               </div>
               <div class="project-card__content">
                 <h3 class="project-card__title">АРИЛС</h3>
-                <p class="project-card__desc">
+                <p class="project-card__desc" data-i18n="proj_3_desc">
                   Айдентика бренда косметики и SMM
                 </p>
               </div>
-            </div>
+            </a>
 
-            <div class="project-card reveal tilt-target">
+            <a
+              href="https://www.behance.net/gallery/255485247/Wildberries-Infographics-Xiaomi-Watch-S4-Smartwatch"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="project-card reveal tilt-target"
+            >
               <div class="project-card__image-box">
                 <img
                   src="smartwatch.jpg"
@@ -469,11 +619,11 @@
               </div>
               <div class="project-card__content">
                 <h3 class="project-card__title">SMART WATCH</h3>
-                <p class="project-card__desc">
+                <p class="project-card__desc" data-i18n="proj_4_desc">
                   Продающая инфографика для маркетплейсов
                 </p>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -481,19 +631,42 @@
       <section class="about" id="about">
         <div class="container about__container">
           <div class="about__left reveal">
-            <span class="about__badge">ПОДХОД И ОПЫТ</span>
-            <h2 class="about__title">
+            <span class="about__badge" data-i18n="about_badge"
+              >ПОДХОД И ОПЫТ</span
+            >
+            <h2 class="about__title" data-i18n="about_title">
               Практичный дизайн с опорой на техническую экспертизу
             </h2>
-            <p class="about__lead">
+            <p class="about__lead" data-i18n="about_lead">
               От пиксельной сетки в диджитал до физических материалов
             </p>
-            <p class="about__text">
+            <p class="about__text" data-i18n="about_text">
               Понимаю работу конверсии в вебе и нюансы реального производства.
               Создаю продуманные макеты: они привлекают клиентов в сети и без
               проблем встают на печать в типографиях или на сборку в рекламных
               цехах.
             </p>
+            <button
+              type="button"
+              class="btn btn--outline about__btn js-open-about-modal"
+              data-magnetic
+            >
+              <span class="btn__text" data-i18n="btn_about_more"
+                >Подробнее об авторе</span
+              >
+              <svg
+                class="btn__arrow"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
           </div>
 
           <div class="about__right reveal">
@@ -502,7 +675,9 @@
                 <span class="js-counter" data-target="20">0</span
                 ><span class="stat-item__suffix">+</span>
               </div>
-              <p class="stat-item__label">ЛЕТ В ДИЗАЙНЕ И ПРОИЗВОДСТВЕ</p>
+              <p class="stat-item__label" data-i18n="stat_1_label">
+                ЛЕТ В ДИЗАЙНЕ И ПРОИЗВОДСТВЕ
+              </p>
             </div>
 
             <div class="stat-item">
@@ -510,14 +685,18 @@
                 <span class="js-counter" data-target="11">0</span
                 ><span class="stat-item__suffix">+</span>
               </div>
-              <p class="stat-item__label">ЛЕТ В PREPRESS И РЕКЛАМНЫХ ЦЕХАХ</p>
+              <p class="stat-item__label" data-i18n="stat_2_label">
+                ЛЕТ В PREPRESS И РЕКЛАМНЫХ ЦЕХАХ
+              </p>
             </div>
 
             <div class="stat-item">
               <div class="stat-item__value stat-item__value--text">
                 RGB / CMYK
               </div>
-              <p class="stat-item__label">ПОЛНЫЙ КОНТРОЛЬ ЦВЕТООПИСАНИЯ</p>
+              <p class="stat-item__label" data-i18n="stat_3_label">
+                ПОЛНЫЙ КОНТРОЛЬ ЦВЕТООПИСАНИЯ
+              </p>
             </div>
           </div>
         </div>
@@ -528,8 +707,10 @@
       <div class="container footer__container">
         <div class="footer__top">
           <div class="footer__info reveal">
-            <h2 class="footer__title">Обсудим ваш проект и задачи бизнеса</h2>
-            <p class="footer__subtitle">
+            <h2 class="footer__title" data-i18n="footer_title">
+              Обсудим ваш проект и задачи бизнеса
+            </h2>
+            <p class="footer__subtitle" data-i18n="footer_subtitle">
               Напишите мне любым удобным способом, чтобы рассчитать стоимость,
               сроки и технические нюансы реализации.
             </p>
@@ -576,10 +757,12 @@
           </div>
         </div>
         <div class="footer__bottom">
-          <p class="footer__copy">
+          <p class="footer__copy" data-i18n="footer_copy">
             &copy; 2026 Наталья Кочуланова. Все права защищены.
           </p>
-          <div class="footer__author">Наталья Кочуланова</div>
+          <div class="footer__author" data-i18n="author_name">
+            Наталья Кочуланова
+          </div>
         </div>
       </div>
     </footer>
@@ -588,6 +771,7 @@
       <div class="modal__overlay js-close-modal"></div>
       <div class="modal__dialog">
         <button
+          type="button"
           class="modal__close js-close-modal"
           aria-label="Закрыть окно"
           data-modal-interactive
@@ -599,8 +783,6 @@
             fill="none"
             stroke="currentColor"
             stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
           >
             <line x1="18" y1="6" x2="6" y2="18"></line>
             <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -608,14 +790,23 @@
         </button>
 
         <div class="modal__header">
-          <h3 class="modal__title">Обсудить проект</h3>
-          <p class="modal__subtitle">
+          <h3 class="modal__title" data-i18n="modal_contact_title">
+            Обсудить проект
+          </h3>
+          <p class="modal__subtitle" data-i18n="modal_contact_sub">
             Выберите направление и укажите контакт — я свяжусь с вами в течение
             2-3 часов с оценкой сроков.
           </p>
         </div>
 
         <form class="modal__form" id="lead-form">
+          <input
+            type="checkbox"
+            name="botcheck"
+            style="display: none !important"
+            tabindex="-1"
+            autocomplete="off"
+          />
           <input
             type="hidden"
             name="service"
@@ -624,13 +815,16 @@
           />
 
           <div class="form-group">
-            <label class="form-label">Направление проекта</label>
+            <label class="form-label" data-i18n="label_direction"
+              >Направление проекта</label
+            >
             <div class="service-chips" id="service-chips">
               <button
                 type="button"
                 class="chip is-active"
                 data-value="Веб-сайт"
                 data-modal-interactive
+                data-i18n="chip_web"
               >
                 Веб-сайт
               </button>
@@ -639,6 +833,7 @@
                 class="chip"
                 data-value="Айдентика"
                 data-modal-interactive
+                data-i18n="chip_identity"
               >
                 Айдентика
               </button>
@@ -647,6 +842,7 @@
                 class="chip"
                 data-value="Инфографика"
                 data-modal-interactive
+                data-i18n="chip_infographics"
               >
                 Инфографика
               </button>
@@ -655,6 +851,7 @@
                 class="chip"
                 data-value="Полиграфия"
                 data-modal-interactive
+                data-i18n="chip_print"
               >
                 Полиграфия
               </button>
@@ -663,6 +860,7 @@
                 class="chip"
                 data-value="Комплекс"
                 data-modal-interactive
+                data-i18n="chip_complex"
               >
                 Комплекс
               </button>
@@ -671,15 +869,59 @@
                 class="chip"
                 data-value="Другое"
                 data-modal-interactive
+                data-i18n="chip_other"
               >
                 Другое
               </button>
             </div>
           </div>
 
+          <div class="form-group">
+            <label class="form-label" data-i18n="label_preferred_channel"
+              >Предпочитаемый способ связи</label
+            >
+            <div class="channel-tabs" id="channel-tabs">
+              <button
+                type="button"
+                class="channel-tab is-active"
+                data-channel="Telegram"
+                data-placeholder="@username или телефон"
+                data-modal-interactive
+              >
+                Telegram
+              </button>
+              <button
+                type="button"
+                class="channel-tab"
+                data-channel="MAX"
+                data-placeholder="Ссылка или телефон"
+                data-modal-interactive
+              >
+                MAX
+              </button>
+              <button
+                type="button"
+                class="channel-tab"
+                data-channel="Gmail"
+                data-placeholder="name@gmail.com"
+                data-modal-interactive
+              >
+                Gmail
+              </button>
+            </div>
+          </div>
+          <input
+            type="hidden"
+            name="channel"
+            id="selected-channel"
+            value="Telegram"
+          />
+
           <div class="form-row">
             <div class="form-group">
-              <label for="user-name" class="form-label">Ваше имя *</label>
+              <label for="user-name" class="form-label" data-i18n="label_name"
+                >Ваше имя *</label
+              >
               <input
                 type="text"
                 id="user-name"
@@ -689,27 +931,31 @@
                 required
                 autocomplete="name"
                 data-modal-interactive
+                data-i18n-placeholder="placeholder_name"
               />
             </div>
             <div class="form-group">
-              <label for="user-contact" class="form-label"
-                >Telegram или телефон *</label
+              <label
+                for="user-contact"
+                class="form-label"
+                data-i18n="label_contact"
+                >Контакт *</label
               >
               <input
                 type="text"
                 id="user-contact"
                 name="contact"
                 class="form-input"
-                placeholder="@username или +7..."
+                placeholder="@username или телефон"
                 required
-                autocomplete="tel"
                 data-modal-interactive
+                data-i18n-placeholder="placeholder_contact"
               />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="user-msg" class="form-label"
+            <label for="user-msg" class="form-label" data-i18n="label_task"
               >О задаче (необязательно)</label
             >
             <textarea
@@ -719,6 +965,7 @@
               rows="3"
               placeholder="Сроки, задачи, ссылки на референсы или ТЗ..."
               data-modal-interactive
+              data-i18n-placeholder="placeholder_task"
             ></textarea>
           </div>
 
@@ -728,7 +975,9 @@
               class="btn btn--primary modal__submit"
               data-modal-interactive
             >
-              <span class="btn__text">Отправить заявку</span>
+              <span class="btn__text" data-i18n="btn_submit_lead"
+                >Отправить заявку</span
+              >
               <svg
                 class="btn__arrow"
                 width="16"
@@ -737,8 +986,6 @@
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
               >
                 <line x1="5" y1="12" x2="19" y2="12"></line>
                 <polyline points="12 5 19 12 12 19"></polyline>
@@ -746,12 +993,242 @@
               <span class="btn__loader"></span>
             </button>
             <div class="form-status" id="form-status"></div>
-            <p class="form-privacy">
+            <p class="form-privacy" data-i18n="privacy_notice">
               Нажимая кнопку, вы подтверждаете согласие на конфиденциальную
               обработку контактных данных.
             </p>
           </div>
         </form>
+      </div>
+    </div>
+
+    <div class="modal modal--about" id="about-modal" aria-hidden="true">
+      <div class="modal__overlay js-close-modal"></div>
+      <div class="modal__dialog modal__dialog--about">
+        <button
+          type="button"
+          class="modal__close js-close-modal"
+          aria-label="Закрыть окно"
+          data-modal-interactive
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="about-modal__grid">
+          <div class="about-modal__aside">
+            <div class="about-modal__photo-box">
+              <img
+                src="natalia.jpg"
+                alt="Наталья Кочуланова"
+                class="about-modal__photo"
+              />
+            </div>
+            <div class="about-modal__meta">
+              <div class="about-modal__meta-block">
+                <span class="about-modal__meta-label" data-i18n="about_meta_edu"
+                  >Образование</span
+                >
+                <p class="about-modal__meta-text" data-i18n="about_edu_1">
+                  ЧГУ &bull; ИЗО и черчение
+                </p>
+                <p class="about-modal__meta-sub" data-i18n="about_edu_2">
+                  Школа «Логомашина» &bull; Digital-дизайн
+                </p>
+              </div>
+              <div class="about-modal__meta-block">
+                <span class="about-modal__meta-label" data-i18n="about_meta_exp"
+                  >Опыт в индустрии</span
+                >
+                <p class="about-modal__meta-text" data-i18n="about_exp_val">
+                  20+ лет практики &bull; 150+ проектов
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-modal__main">
+            <div class="about-modal__header">
+              <h3 class="about-modal__name" data-i18n="author_name">
+                Наталья Кочуланова
+              </h3>
+              <p class="about-modal__role" data-i18n="about_role">
+                Графический & Digital-дизайнер &bull; Prepress-эксперт
+              </p>
+            </div>
+
+            <div class="about-modal__desc">
+              <p class="about-modal__lead" data-i18n="about_lead_full">
+                Академическое художественное образование (ЧГУ) в сочетании с
+                многолетним опытом в реальном производстве рекламных цехов и
+                типографий.
+              </p>
+              <p class="about-modal__text" data-i18n="about_text_full">
+                Свободно объединяю технологические стандарты физических
+                материалов (prepress, спуски полос, фрезеровка, плоттерная
+                резка) с современным цифровым дизайном (UI/UX, Tilda Z-Block,
+                инфографика, бизнес-презентации). Для генерации уникальных
+                арт-активов и ускорения рутинных этапов активно использую
+                Midjourney и ChatGPT.
+              </p>
+            </div>
+
+            <div class="about-modal__block">
+              <h4 class="about-modal__title" data-i18n="about_skills_title">
+                Ключевые компетенции
+              </h4>
+              <div class="about-modal__cards">
+                <div class="about-card">
+                  <div class="about-card__tag">Web & UI</div>
+                  <h5 class="about-card__title">Digital & Web</h5>
+                  <p class="about-card__text" data-i18n="about_card_1">
+                    Проектирование в Figma, верстка лендингов на Tilda,
+                    продающая инфографика и карточки для маркетплейсов, 150+
+                    питч-деков и презентаций для EdTech и бизнеса.
+                  </p>
+                </div>
+                <div class="about-card">
+                  <div class="about-card__tag">Print</div>
+                  <h5 class="about-card__title" data-i18n="service_4_title">
+                    Графика & Prepress
+                  </h5>
+                  <p class="about-card__text" data-i18n="about_card_2">
+                    Владение Adobe Photoshop и CorelDRAW. Допечатная подготовка
+                    любой сложности под стандарты производств: CMYK, УФ-печать,
+                    плоттерная резка, точные контуры.
+                  </p>
+                </div>
+                <div class="about-card">
+                  <div class="about-card__tag">Identity</div>
+                  <h5 class="about-card__title" data-i18n="about_card_3_title">
+                    Брендинг & Носители
+                  </h5>
+                  <p class="about-card__text" data-i18n="about_card_3">
+                    Логотипы, бренд-константы, навигационные интерьерные
+                    системы, комплексный дизайн оформления фасадов и
+                    брендирования автотранспорта.
+                  </p>
+                </div>
+                <div class="about-card">
+                  <div class="about-card__tag">Art</div>
+                  <h5 class="about-card__title" data-i18n="about_card_4_title">
+                    Арт-дирекшн
+                  </h5>
+                  <p class="about-card__text" data-i18n="about_card_4">
+                    Профессиональный контроль цвета, типографики и иерархии
+                    композиции, опыт руководства художественным отделением и
+                    кураторства выставочных экспозиций.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-modal__block">
+              <h4 class="about-modal__title" data-i18n="about_work_title">
+                Опыт работы
+              </h4>
+              <div class="about-timeline">
+                <div class="about-timeline__item">
+                  <span class="about-timeline__period">2021 — 2026</span>
+                  <div class="about-timeline__info">
+                    <h5
+                      class="about-timeline__role"
+                      data-i18n="timeline_1_role"
+                    >
+                      Digital-дизайнер / Фриланс
+                    </h5>
+                    <p class="about-timeline__desc" data-i18n="timeline_1_desc">
+                      Разработка коммерческой графики и интерфейсов. Palme
+                      School (Канада): создание 150+ материалов в единой
+                      бренд-системе. Курс продуктового дизайна в «Логомашине».
+                    </p>
+                  </div>
+                </div>
+                <div class="about-timeline__item">
+                  <span class="about-timeline__period">2013 — 2026</span>
+                  <div class="about-timeline__info">
+                    <h5
+                      class="about-timeline__role"
+                      data-i18n="timeline_2_role"
+                    >
+                      Руководитель художественного отделения / Арт-консультант
+                    </h5>
+                    <p class="about-timeline__desc" data-i18n="timeline_2_desc">
+                      Руководство выставочной деятельностью и визуальным стилем
+                      крупных арт-событий. Экспертный контроль композиции и
+                      цветового пространства.
+                    </p>
+                  </div>
+                </div>
+                <div class="about-timeline__item">
+                  <span class="about-timeline__period">2002 — 2013</span>
+                  <div class="about-timeline__info">
+                    <h5
+                      class="about-timeline__role"
+                      data-i18n="timeline_3_role"
+                    >
+                      Дизайнер-технолог / Prepress-специалист (РА «Прорыв», ООО
+                      «ЦРТ»)
+                    </h5>
+                    <p class="about-timeline__desc" data-i18n="timeline_3_desc">
+                      Рекламная поддержка ХК «Северсталь» и сети «Мори-Синема».
+                      Проектирование наружной и интерьерной рекламы: от
+                      векторных чертежей до сборки в цехах и монтажа.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about-modal__block">
+              <h4 class="about-modal__title" data-i18n="about_tools_title">
+                Инструменты и технологии
+              </h4>
+              <div class="about-tags">
+                <span class="about-tag">Figma</span>
+                <span class="about-tag">Adobe Photoshop</span>
+                <span class="about-tag">CorelDRAW</span>
+                <span class="about-tag">Tilda (Z-Block)</span>
+                <span class="about-tag">Prepress / CMYK</span>
+                <span class="about-tag">Midjourney</span>
+                <span class="about-tag">ChatGPT</span>
+              </div>
+            </div>
+
+            <div class="about-modal__action">
+              <button
+                type="button"
+                class="btn btn--primary js-about-to-contact"
+                data-magnetic
+              >
+                <span data-i18n="btn_discuss_author"
+                  >Обсудить проект с автором</span
+                >
+                <svg
+                  class="btn__arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
