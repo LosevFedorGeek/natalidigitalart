@@ -107,6 +107,7 @@ body {
   overflow-x: clip;
   width: 100%;
   position: relative;
+  padding-top: 80px;
   transition:
     background-color var(--transition-fast),
     color var(--transition-fast);
@@ -288,20 +289,22 @@ img {
 }
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 93px;
+  height: 80px;
   background-color: var(--bg-header);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-light);
   display: flex;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+  z-index: 500;
   transition:
     background-color var(--transition-fast),
-    border-color var(--transition-fast);
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 .header__container {
@@ -317,7 +320,7 @@ img {
   letter-spacing: 0.02em;
   color: var(--text-dark);
   text-decoration: none;
-  z-index: 103;
+  z-index: 520;
   display: inline-block;
   transition:
     opacity var(--transition-fast),
@@ -451,7 +454,7 @@ img {
   justify-content: space-between;
   cursor: pointer;
   padding: 3px 0;
-  z-index: 103;
+  z-index: 520;
 }
 
 .burger-btn span {
@@ -473,7 +476,7 @@ img {
 }
 
 .hero {
-  padding: 70px 0 90px;
+  padding: 50px 0 80px;
 }
 
 .hero__container {
@@ -788,10 +791,12 @@ img {
 }
 
 .service-card {
+  text-decoration: none;
+  color: inherit;
   background-color: var(--bg-card);
   border: 1px solid var(--border-card);
   border-radius: 8px;
-  padding: 36px 28px;
+  padding: 34px 26px;
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
@@ -1156,20 +1161,20 @@ img {
 .modal__dialog {
   position: relative;
   background-color: var(--bg-card);
-  width: min(100%, 520px);
+  width: min(100%, 500px);
   max-height: calc(100dvh - 32px);
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
   margin: auto;
   box-sizing: border-box;
-  padding: 40px 36px 32px;
+  padding: 34px 30px 26px;
   border-radius: 14px;
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-modal);
-  transform: translateY(20px) scale(0.97);
+  transform: translateY(16px) scale(0.98);
   transition:
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     background-color var(--transition-fast);
   z-index: 2;
 }
@@ -1180,10 +1185,10 @@ img {
 
 .modal__close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 36px;
-  height: 36px;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   border: 1px solid var(--border-light);
   background-color: var(--bg-badge);
@@ -1208,41 +1213,41 @@ img {
 }
 
 .modal__header {
-  margin-bottom: 24px;
-  padding-right: 48px;
+  margin-bottom: 20px;
+  padding-right: 44px;
 }
 
 .modal__title {
   font-family: var(--font-serif);
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.15;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   color: var(--text-dark);
 }
 
 .modal__subtitle {
-  font-size: 13.5px;
-  line-height: 1.5;
+  font-size: 13px;
+  line-height: 1.45;
   color: var(--text-muted);
 }
 
 .modal__form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 14px;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 14px;
 }
 
 .form-label {
@@ -1254,7 +1259,7 @@ img {
 .service-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 
 .chip {
@@ -1264,7 +1269,7 @@ img {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
-  padding: 7px 15px;
+  padding: 6px 13px;
   border-radius: 20px;
   cursor: pointer;
   user-select: none;
@@ -1300,7 +1305,7 @@ img {
 .channel-tab {
   background: transparent;
   border: none;
-  padding: 8px 4px;
+  padding: 7px 4px;
   border-radius: 6px;
   font-family: var(--font-sans);
   font-size: 12px;
@@ -1327,9 +1332,9 @@ img {
 .form-input,
 .form-textarea {
   width: 100%;
-  padding: 13px 16px;
+  padding: 11px 14px;
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: 13.5px;
   background-color: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: 6px;
@@ -1359,20 +1364,23 @@ img {
 .modal__actions {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 8px;
+  margin-top: 2px;
 }
 
 .modal__submit {
   width: 100%;
-  height: 50px;
+  height: 48px;
 }
 
 .form-status {
-  font-size: 13px;
+  font-size: 12.5px;
   text-align: center;
-  min-height: 18px;
   transition: color var(--transition-fast);
+}
+
+.form-status:empty {
+  display: none;
 }
 
 .form-status.success {
@@ -1386,10 +1394,11 @@ img {
 }
 
 .form-privacy {
-  font-size: 11.5px;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 1.4;
   color: var(--text-dim);
   text-align: center;
+  margin: 0;
 }
 
 .btn__loader {
@@ -1741,10 +1750,11 @@ img {
     height: 100%;
     height: 100dvh;
     background-color: var(--bg-primary);
-    padding: 110px 32px 48px;
+    padding: 90px 24px 28px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
     transform: translateX(100%);
     opacity: 0;
     visibility: hidden;
@@ -1753,7 +1763,7 @@ img {
       transform var(--transition-smooth),
       opacity 0.25s ease,
       visibility 0.3s;
-    z-index: 102;
+    z-index: 450;
     overflow-y: auto;
     overscroll-behavior: contain;
     box-sizing: border-box;
@@ -1769,27 +1779,32 @@ img {
   .header__menu {
     flex-direction: column;
     align-items: flex-start;
-    gap: 24px;
+    gap: 16px;
     width: 100%;
   }
 
   .header__link {
     font-family: var(--font-serif);
-    font-size: 32px;
+    font-size: 28px;
     color: var(--text-dark);
+    line-height: 1.2;
   }
 
   .header__mobile-controls {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin: 20px 0;
+    gap: 14px;
+    margin: 10px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-light);
+    width: 100%;
   }
 
   .header__mobile-btn {
     display: flex;
     width: 100%;
-    height: 52px;
+    height: 48px;
+    margin-top: 4px;
   }
 
   .portfolio__grid {
@@ -1810,6 +1825,8 @@ img {
   }
 
   .about-modal__aside {
+    position: static !important;
+    top: auto !important;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1834,37 +1851,49 @@ img {
 }
 
 @media (max-width: 640px) {
+  body {
+    padding-top: 70px;
+  }
+
   .container {
     padding: 0 16px;
   }
+
   .header {
-    height: 72px;
+    height: 70px;
   }
+
   .hero {
     padding: 24px 0 54px;
   }
+
   .hero__title {
     font-size: 30px;
     line-height: 1.18;
   }
+
   .hero__actions {
     flex-direction: column;
     width: 100%;
     gap: 12px;
   }
+
   .hero__actions .btn {
     width: 100%;
   }
+
   .hero__slider {
     aspect-ratio: 4 / 3;
     border-radius: 12px;
   }
+
   .hero__slider-bar {
     bottom: 10px;
     left: 10px;
     right: 10px;
     padding: 6px 10px;
   }
+
   .hero__slide-badge {
     top: 10px;
     left: 10px;
@@ -1876,13 +1905,13 @@ img {
   }
 
   .modal__dialog {
-    padding: 30px 16px 22px;
+    padding: 24px 18px 18px;
     border-radius: 12px;
     max-height: calc(100dvh - 24px);
   }
 
   .modal__dialog--about {
-    padding: 30px 14px 22px;
+    padding: 28px 16px 20px;
     border-radius: 12px;
     max-height: calc(100dvh - 24px);
   }
@@ -1890,56 +1919,73 @@ img {
   .modal__header {
     padding-right: 36px;
   }
+
   .modal__close {
     top: 14px;
     right: 14px;
     width: 32px;
     height: 32px;
   }
+
   .modal__title {
-    font-size: 26px;
+    font-size: 24px;
   }
+
   .form-row {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
   }
+
+  .modal__form {
+    gap: 12px;
+  }
+
   .channel-tabs {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 4px;
   }
+
   .channel-tab {
     padding: 7px 2px;
     font-size: 11px;
   }
+
   .services__grid {
     grid-template-columns: 1fr;
   }
+
   .section-title,
   .about__title,
   .footer__title {
     font-size: 28px;
   }
+
   .stat-item__value {
     font-size: 44px;
   }
+
   .footer__bottom {
     flex-direction: column;
     gap: 16px;
     align-items: flex-start;
   }
+
   .about-modal__aside {
     display: flex;
     flex-direction: column;
     text-align: center;
   }
+
   .about-modal__photo-box {
     width: 120px;
     height: 120px;
     margin: 0 auto;
   }
+
   .about-modal__name {
     font-size: 26px;
   }
+
   .about-modal__cards {
     grid-template-columns: 1fr;
   }
@@ -1949,17 +1995,25 @@ img {
   .hero__title {
     font-size: 26px;
   }
+
   .header__logo {
     font-size: 20px;
   }
+
   .btn {
     padding: 12px 18px;
     font-size: 13.5px;
   }
+
   .service-card {
     padding: 24px 18px;
   }
+
   .channel-tabs {
     grid-template-columns: 1fr;
+  }
+
+  .modal__dialog {
+    padding: 20px 14px 16px;
   }
 }
