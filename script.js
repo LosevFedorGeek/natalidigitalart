@@ -91,15 +91,22 @@ document.addEventListener("DOMContentLoaded", () => {
       about_card_4:
         "Профессиональный контроль цвета, типографики и иерархии композиции, опыт руководства художественным отделением и кураторства выставочных экспозиций.",
       about_work_title: "Опыт работы",
+      timeline_1_period: "2022 — настоящее время",
       timeline_1_role: "Digital-дизайнер / Фриланс",
       timeline_1_desc:
-        "Разработка коммерческой графики и интерфейсов. Palme School (Канада): создание 150+ материалов в единой бренд-системе. Курс продуктового дизайна в «Логомашине».",
+        "Разработка коммерческой графики, сайтов на Tilda, баннеров и интерфейсов. Курс продуктового дизайна в «Логомашине» (2025–2026).",
+      timeline_palme_period: "2021 — 2022",
+      timeline_palme_role: "Graphic Designer / Palme School (Канада)",
+      timeline_palme_desc:
+        "Создание 150+ презентаций по гайдлайнам, стилизация иллюстраций для канадской онлайн-школы.",
+      timeline_2_period: "2013 — 2026",
       timeline_2_role:
         "Руководитель художественного отделения / Арт-консультант",
       timeline_2_desc:
         "Руководство выставочной деятельностью и визуальным стилем крупных арт-событий. Экспертный контроль композиции и цветового пространства.",
+      timeline_3_period: "2002 — 2013",
       timeline_3_role:
-        "Дизайнер-технолог / Prepress-специалист (РА «Прорыв», ООО «ЦРТ»)",
+        "Дизайнер-технолог / Prepress-специалист (РА «Прорыв», ЗАО «ЦРТ»)",
       timeline_3_desc:
         "Рекламная поддержка ХК «Северсталь» и сети «Мори-Синема». Проектирование наружной и интерьерной рекламы: от векторных чертежей до сборки в цехах и монтажа.",
       about_tools_title: "Инструменты и технологии",
@@ -194,14 +201,21 @@ document.addEventListener("DOMContentLoaded", () => {
       about_card_4:
         "Senior mastery over color hierarchy, typography scales, and composition, with past background leading an academic art division.",
       about_work_title: "Career Milestones",
+      timeline_1_period: "2022 — Present",
       timeline_1_role: "Digital Designer / Independent",
       timeline_1_desc:
-        "Commercial web and visual assets. Palme School (Canada): 150+ brand assets in cohesive identity. Advanced product design certification at Logomachine.",
+        "Commercial web and visual assets, Tilda landing pages, and UI interfaces. Advanced product design certification at Logomachine (2025–2026).",
+      timeline_palme_period: "2021 — 2022",
+      timeline_palme_role: "Graphic Designer / Palme School (Canada)",
+      timeline_palme_desc:
+        "Production of 150+ brand-aligned presentations, custom illustration styling for a Canadian online school.",
+      timeline_2_period: "2013 — 2026",
       timeline_2_role: "Head of Fine Arts Department / Art Consultant",
       timeline_2_desc:
         "Curating exhibition environments and brand visuals for major regional arts events. Rigorous oversight of color spaces and aesthetics.",
+      timeline_3_period: "2002 — 2013",
       timeline_3_role:
-        "Production Designer / Prepress Lead (RA Proryv, CRT LLC)",
+        "Production Designer / Prepress Lead (RA Proryv, CJSC CRT)",
       timeline_3_desc:
         "Campaign visuals for Severstal Hockey Club and Mori Cinema. Turnkey signage engineering from vector blueprints to assembly and field installation.",
       about_tools_title: "Tools & Stack",
@@ -699,6 +713,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const aboutModal = document.getElementById("about-modal");
+  const contactModal = document.getElementById("contact-modal");
   const openContactButtons = document.querySelectorAll(".js-open-modal");
   const openAboutButtons = document.querySelectorAll(".js-open-about-modal");
   const closeButtons = document.querySelectorAll(".js-close-modal");
@@ -763,7 +778,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const leadForm = document.getElementById("lead-form");
   const statusDiv = document.getElementById("form-status");
   const submitBtn = leadForm ? leadForm.querySelector(".modal__submit") : null;
-  const contactModal = document.getElementById("contact-modal");
 
   const resetModalInteractions = () => {
     const chips = document.querySelectorAll("#service-chips .chip");
