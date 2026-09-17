@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       footer_subtitle:
         "Напишите мне любым удобным способом, чтобы рассчитать стоимость, сроки и технические нюансы реализации.",
       footer_copy: "© 2026 Наталья Кочуланова. Все права защищены.",
+      dev_label: "Разработка сайта",
       modal_contact_title: "Обсудить проект",
       modal_contact_sub:
         "Выберите направление и укажите контакт — я свяжусь с вами в течение 2-3 часов с оценкой сроков.",
@@ -159,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
       footer_subtitle:
         "Reach out via any channel below to get cost projections, timelines, and technical architecture.",
       footer_copy: "© 2026 Natalia Kochulanova. All rights reserved.",
+      dev_label: "Crafted by",
       modal_contact_title: "Start a Project",
       modal_contact_sub:
         "Select an area and leave your handle — I will get back within 2-3 hours with timeline estimates.",
@@ -276,13 +278,22 @@ document.addEventListener("DOMContentLoaded", () => {
   applyTheme(currentTheme);
 
   const scrollBar = document.getElementById("scroll-progress");
+  const headerEl = document.querySelector(".header");
+
   window.addEventListener(
     "scroll",
     () => {
+      const scrollY = window.scrollY;
+      if (headerEl) {
+        if (scrollY > 30) {
+          headerEl.classList.add("is-scrolled");
+        } else {
+          headerEl.classList.remove("is-scrolled");
+        }
+      }
       const totalHeight =
         document.documentElement.scrollHeight - window.innerHeight;
-      const progress =
-        totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+      const progress = totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0;
       if (scrollBar) scrollBar.style.width = `${progress}%`;
     },
     { passive: true },
