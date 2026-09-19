@@ -67,7 +67,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='120' fill='%23121316'/%3E%3Cpath d='M102 361V151h34l84 146V151h34v210h-34L136 215v146z' fill='%23F8F6F2'/%3E%3Cpath d='M276 151h32v125l62-71h40l-74 83 76 73h-44l-60-61v61h-32z' fill='%237D8597'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='120' fill='%23121316'/%3E%3Cpath d='M98 362V150h36l76 138V150h36v212h-34L136 222v140H98z' fill='%23FFFFFF'/%3E%3Cpath d='M270 150h36v126l62-72h46l-78 84 82 74h-48l-64-62v62h-36V150z' fill='%23A6AFBF'/%3E%3C/svg%3E"
     />
     <link rel="icon" type="image/svg+xml" href="logo.svg" />
     <link rel="icon" href="favicon.ico" sizes="any" />
@@ -154,7 +154,7 @@
 
     <header class="header">
       <div class="container header__container">
-        <a href="#" class="header__logo" data-i18n="author_name"
+        <a href="#" class="header__logo" data-magnetic data-i18n="author_name"
           >Наталья Кочуланова</a
         >
 
@@ -272,6 +272,7 @@
           <button
             type="button"
             class="theme-toggle header__desktop-control js-theme-toggle"
+            data-magnetic
             aria-label="Сменить тему"
           >
             <svg
@@ -329,7 +330,7 @@
     <main>
       <section class="hero">
         <div class="container hero__container">
-          <div class="hero__content reveal">
+          <div class="hero__content hero__content--enter">
             <span class="hero__badge"
               ><span class="badge-dot"></span>UI/UX &amp; GRAPHIC DESIGNER</span
             >
@@ -370,7 +371,7 @@
             </div>
           </div>
 
-          <div class="hero__visual reveal">
+          <div class="hero__visual hero__visual--enter">
             <div class="hero__slider tilt-target" id="hero-slider">
               <div class="hero__slides">
                 <div class="hero__slide is-active">
@@ -818,7 +819,7 @@
           </div>
 
           <div class="about__right reveal">
-            <div class="stat-item">
+            <div class="stat-item" data-proximity-card>
               <div class="stat-item__value">
                 <span class="js-counter" data-target="20">0</span
                 ><span class="stat-item__suffix">+</span>
@@ -828,7 +829,7 @@
               </p>
             </div>
 
-            <div class="stat-item">
+            <div class="stat-item" data-proximity-card>
               <div class="stat-item__value">
                 <span class="js-counter" data-target="11">0</span
                 ><span class="stat-item__suffix">+</span>
@@ -838,7 +839,7 @@
               </p>
             </div>
 
-            <div class="stat-item">
+            <div class="stat-item" data-proximity-card>
               <div class="stat-item__value stat-item__value--text">
                 RGB / CMYK
               </div>

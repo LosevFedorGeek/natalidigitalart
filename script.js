@@ -319,41 +319,55 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   const glowEl = document.getElementById("ambient-glow");
-  let glowX = window.innerWidth / 2;
-  let glowY = window.innerHeight / 2;
-  let curGlowX = glowX;
-  let curGlowY = glowY;
+  if (glowEl) {
+    let glowX = window.innerWidth / 2;
+    let glowY = window.innerHeight / 2;
+    let curGlowX = glowX;
+    let curGlowY = glowY;
 
-  window.addEventListener("mousemove", (e) => {
-    glowX = e.clientX;
-    glowY = e.clientY;
-  });
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        glowX = e.clientX;
+        glowY = e.clientY;
+      },
+      { passive: true },
+    );
 
-  const updateGlow = () => {
-    curGlowX += (glowX - curGlowX) * 0.08;
-    curGlowY += (glowY - curGlowY) * 0.08;
-    if (glowEl) {
-      glowEl.style.left = `${curGlowX}px`;
-      glowEl.style.top = `${curGlowY}px`;
-    }
-    requestAnimationFrame(updateGlow);
-  };
-  updateGlow();
+    const updateGlow = () => {
+      curGlowX += (glowX - curGlowX) * 0.08;
+      curGlowY += (glowY - curGlowY) * 0.08;
+      glowEl.style.transform = `translate3d(${curGlowX.toFixed(1)}px, ${curGlowY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      requestAnimationFrame(updateGlow);
+    };
+    updateGlow();
+  }
 
   const reveals = document.querySelectorAll(".reveal");
-  const revealObserver = new IntersectionObserver(
-    (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
-  );
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.05, rootMargin: "0px 0px 80px 0px" },
+    );
 
-  reveals.forEach((el) => revealObserver.observe(el));
+    reveals.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight) {
+        el.classList.add("is-visible");
+      } else {
+        revealObserver.observe(el);
+      }
+    });
+  } else {
+    reveals.forEach((el) => el.classList.add("is-visible"));
+  }
 
   const counters = document.querySelectorAll(".js-counter");
   let countersTriggered = false;
@@ -387,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
     },
-    { threshold: 0.4 },
+    { threshold: 0.2 },
   );
 
   const aboutSection = document.querySelector(".about");
@@ -396,14 +410,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const isDesktop = window.matchMedia(
     "(hover: hover) and (pointer: fine)",
   ).matches;
-  let mouseX = -10000;
-  let mouseY = -10000;
 
   if (isDesktop) {
-    window.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    let mouseX = -10000;
+    let mouseY = -10000;
+
+    window.addEventListener(
+      "mousemove",
+      (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      },
+      { passive: true },
+    );
 
     const magneticElements = Array.from(
       document.querySelectorAll("[data-magnetic]"),
@@ -413,86 +432,65 @@ document.addEventListener("DOMContentLoaded", () => {
       y: 0,
       targetX: 0,
       targetY: 0,
+      scale: 1,
+      targetScale: 1,
     }));
 
-    const tiltElements = Array.from(
-      document.querySelectorAll(".tilt-target"),
+    const tiltCards = Array.from(
+      document.querySelectorAll(".service-card, .project-card, .tilt-target"),
     ).map((el) => ({
       el,
       rx: 0,
       ry: 0,
-      ty: 0,
+      tz: 0,
       targetRx: 0,
       targetRy: 0,
-      targetTy: 0,
-    }));
-
-    const modalInteractiveElements = Array.from(
-      document.querySelectorAll("[data-modal-interactive]"),
-    ).map((el) => ({
-      el,
-      x: 0,
-      y: 0,
-      targetX: 0,
-      targetY: 0,
+      targetTz: 0,
     }));
 
     const updatePhysics = () => {
-      let closestMagnetic = null;
-      let minDistance = Infinity;
-
       magneticElements.forEach((item) => {
-        const rect = item.el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dist = Math.hypot(mouseX - cx, mouseY - cy);
-        const radius = Math.max(rect.width, rect.height) * 0.75;
-
-        if (dist < radius && dist < minDistance) {
-          minDistance = dist;
-          closestMagnetic = {
-            item,
-            dx: mouseX - cx,
-            dy: mouseY - cy,
-            radius,
-            dist,
-          };
-        }
-      });
-
-      magneticElements.forEach((item) => {
-        if (closestMagnetic && closestMagnetic.item === item) {
-          const force = 1 - closestMagnetic.dist / closestMagnetic.radius;
-          item.targetX = Math.max(
-            -5,
-            Math.min(5, closestMagnetic.dx * force * 0.18),
-          );
-          item.targetY = Math.max(
-            -4,
-            Math.min(4, closestMagnetic.dy * force * 0.18),
-          );
-        } else {
-          item.targetX = 0;
-          item.targetY = 0;
-        }
-
-        item.x += (item.targetX - item.x) * 0.12;
-        item.y += (item.targetY - item.y) * 0.12;
-
-        if (Math.abs(item.x) > 0.01 || Math.abs(item.y) > 0.01) {
-          item.el.style.transform = `translate3d(${item.x.toFixed(2)}px, ${item.y.toFixed(2)}px, 0)`;
-        } else {
-          item.el.style.transform = "";
-        }
-      });
-
-      tiltElements.forEach((item) => {
         const rect = item.el.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
         const cy = rect.top + rect.height / 2;
         const dx = mouseX - cx;
         const dy = mouseY - cy;
-        const buffer = 80;
+        const dist = Math.hypot(dx, dy);
+        const radius = Math.max(rect.width, rect.height) * 1.6;
+
+        if (dist < radius) {
+          const power = Math.pow(1 - dist / radius, 1.4);
+          item.targetX = dx * power * 0.22;
+          item.targetY = dy * power * 0.22;
+          item.targetScale = 1 + power * 0.025;
+        } else {
+          item.targetX = 0;
+          item.targetY = 0;
+          item.targetScale = 1;
+        }
+
+        item.x += (item.targetX - item.x) * 0.1;
+        item.y += (item.targetY - item.y) * 0.1;
+        item.scale += (item.targetScale - item.scale) * 0.1;
+
+        if (
+          Math.abs(item.x) > 0.01 ||
+          Math.abs(item.y) > 0.01 ||
+          Math.abs(item.scale - 1) > 0.001
+        ) {
+          item.el.style.transform = `translate3d(${item.x.toFixed(2)}px, ${item.y.toFixed(2)}px, 0) scale(${item.scale.toFixed(3)})`;
+        } else {
+          item.el.style.transform = "";
+        }
+      });
+
+      tiltCards.forEach((item) => {
+        const rect = item.el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
+        const buffer = 100;
 
         if (
           mouseX >= rect.left - buffer &&
@@ -502,64 +500,39 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
           const maxW = rect.width / 2 + buffer;
           const maxH = rect.height / 2 + buffer;
-          item.targetRx = -Math.max(-1, Math.min(1, dy / maxH)) * 4.5;
-          item.targetRy = Math.max(-1, Math.min(1, dx / maxW)) * 4.5;
-          item.targetTy = -4;
+          const nx = Math.max(-1, Math.min(1, dx / maxW));
+          const ny = Math.max(-1, Math.min(1, dy / maxH));
+
+          item.targetRx = -ny * 4;
+          item.targetRy = nx * 4;
+          item.targetTz = -3;
+
+          const innerX = mouseX - rect.left;
+          const innerY = mouseY - rect.top;
+          item.el.style.setProperty("--mouse-x", `${innerX.toFixed(1)}px`);
+          item.el.style.setProperty("--mouse-y", `${innerY.toFixed(1)}px`);
+          item.el.classList.add("is-proximity");
         } else {
           item.targetRx = 0;
           item.targetRy = 0;
-          item.targetTy = 0;
+          item.targetTz = 0;
+          item.el.classList.remove("is-proximity");
         }
 
-        item.rx += (item.targetRx - item.rx) * 0.08;
-        item.ry += (item.targetRy - item.ry) * 0.08;
-        item.ty += (item.targetTy - item.ty) * 0.08;
+        item.rx += (item.targetRx - item.rx) * 0.09;
+        item.ry += (item.targetRy - item.ry) * 0.09;
+        item.tz += (item.targetTz - item.tz) * 0.09;
 
         if (
           Math.abs(item.rx) > 0.01 ||
           Math.abs(item.ry) > 0.01 ||
-          Math.abs(item.ty) > 0.01
+          Math.abs(item.tz) > 0.01
         ) {
-          item.el.style.transform = `perspective(1000px) rotateX(${item.rx.toFixed(2)}deg) rotateY(${item.ry.toFixed(2)}deg) translate3d(0, ${item.ty.toFixed(2)}px, 0)`;
+          item.el.style.transform = `perspective(1000px) rotateX(${item.rx.toFixed(2)}deg) rotateY(${item.ry.toFixed(2)}deg) translate3d(0, ${item.tz.toFixed(2)}px, 0)`;
         } else {
           item.el.style.transform = "";
         }
       });
-
-      const anyModalOpen = document.querySelector(".modal.is-open");
-      if (anyModalOpen) {
-        modalInteractiveElements.forEach((item) => {
-          const rect = item.el.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dist = Math.hypot(mouseX - cx, mouseY - cy);
-          const radius = Math.max(rect.width, rect.height) * 0.6;
-
-          if (dist < radius) {
-            const force = 1 - dist / radius;
-            item.targetX = Math.max(
-              -3,
-              Math.min(3, (mouseX - cx) * force * 0.08),
-            );
-            item.targetY = Math.max(
-              -2,
-              Math.min(2, (mouseY - cy) * force * 0.08),
-            );
-          } else {
-            item.targetX = 0;
-            item.targetY = 0;
-          }
-
-          item.x += (item.targetX - item.x) * 0.12;
-          item.y += (item.targetY - item.y) * 0.12;
-
-          if (Math.abs(item.x) > 0.01 || Math.abs(item.y) > 0.01) {
-            item.el.style.transform = `translate3d(${item.x.toFixed(2)}px, ${item.y.toFixed(2)}px, 0)`;
-          } else {
-            item.el.style.transform = "";
-          }
-        });
-      }
 
       requestAnimationFrame(updatePhysics);
     };
