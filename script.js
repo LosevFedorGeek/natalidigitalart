@@ -1,6 +1,21 @@
 const WEB3FORMS_ACCESS_KEY = "38155835-3b6e-4487-8b7c-53662c37263d";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const typograph = (text) => {
+    if (!text || typeof text !== "string") return text;
+    return text
+      .replace(/\s+—\s+/g, "\u00A0— ")
+      .replace(
+        /(^|[\s(«"'>])(в|во|на|с|со|к|ко|от|ото|до|по|из|изо|о|об|обо|у|за|под|подо|над|надо|при|про|через|и|а|но|да|или|ли|бы|б|же|ж)\s+/gi,
+        "$1$2\u00A0",
+      )
+      .replace(
+        /(\d+)\s+(лет|года|год|проектов|проекта|проект|часов|часа|час|мин|сек)/gi,
+        "$1\u00A0$2",
+      )
+      .replace(/(\d+)\+(\s+)/g, "$1+\u00A0");
+  };
+
   const i18n = {
     ru: {
       author_name: "Наталья Кочуланова",
@@ -10,49 +25,52 @@ document.addEventListener("DOMContentLoaded", () => {
       nav_contacts: "Контакты",
       btn_discuss: "Обсудить проект",
       btn_contact: "Связаться",
-      hero_title: "Комплексный дизайн для бизнеса: от айдентики до сайтов",
+      hero_title:
+        "Комплексный дизайн для\u00A0бизнеса: от\u00A0айдентики до\u00A0сайтов",
       hero_subtitle:
-        "20+ лет практики, академическая художественная школа и точная допечатная подготовка. Создаю визуальные решения, которые помогают брендам говорить на языке премиального минимализма.",
+        "20+\u00A0лет практики, академическая художественная школа и\u00A0точная допечатная подготовка. Создаю визуальные решения, которые помогают брендам говорить на\u00A0языке премиального минимализма.",
       btn_portfolio: "Портфолио",
-      services_title: "Услуги и специализация",
+      services_title: "Услуги и\u00A0специализация",
       services_subtitle:
-        "Многолетний опыт в различных областях визуального дизайна позволяет решать задачи любой сложности под ключ.",
+        "Многолетний опыт в\u00A0различных областях визуального дизайна позволяет решать задачи любой сложности под\u00A0ключ.",
       service_1_text:
-        "Проектирование и разработка сайтов, многостраничных лендингов на Tilda, адаптивный дизайн для идеального отображения на всех устройствах.",
+        "Проектирование и\u00A0разработка сайтов, многостраничных лендингов на\u00A0Tilda, адаптивный дизайн для\u00A0идеального отображения на\u00A0всех устройствах.",
       service_2_title: "Брендинг & Айдентика",
       service_2_text:
-        "Разработка уникальных логотипов, создание фирменного стиля, констант бренда и эстетичного визуала для социальных сетей.",
+        "Разработка уникальных логотипов, создание фирменного стиля, констант бренда и\u00A0эстетичного визуала для\u00A0социальных сетей.",
       service_3_title: "Презентации & Инфографика",
       service_3_text:
-        "Профессиональные питч-деки, презентации для инвесторов и партнёров, а также инфографика и карточки для маркетплейсов.",
+        "Профессиональные питч-деки, презентации для\u00A0инвесторов и\u00A0партнёров, а\u00A0также инфографика и\u00A0карточки для\u00A0маркетплейсов.",
       service_4_title: "Полиграфия & Prepress",
       service_4_text:
-        "Дизайн печатной продукции и материалов для бизнеса. Точная допечатная подготовка макетов под стандарты и спецификации типографий.",
+        "Дизайн печатной продукции и\u00A0материалов для\u00A0бизнеса. Точная допечатная подготовка макетов под\u00A0стандарты и\u00A0спецификации типографий.",
       portfolio_title: "Избранные работы",
       portfolio_subtitle:
-        "Проекты на стыке чистого искусства, современных медиатехнологий и практической пользы для коммерческих клиентов.",
+        "Проекты на\u00A0стыке чистого искусства, современных медиатехнологий и\u00A0практической пользы для\u00A0коммерческих клиентов.",
       btn_see_all: "Смотреть все",
       proj_1_desc: "Премиальный сайт строительной компании",
       proj_2_desc: "Концепт e-commerce магазина одежды",
-      proj_3_desc: "Айдентика бренда косметики и SMM",
-      proj_4_desc: "Продающая инфографика для маркетплейсов",
-      about_badge: "ПОДХОД И ОПЫТ",
-      about_title: "Практичный дизайн с опорой на техническую экспертизу",
-      about_lead: "От пиксельной сетки в диджитал до физических материалов",
+      proj_3_desc: "Айдентика бренда косметики и\u00A0SMM",
+      proj_4_desc: "Продающая инфографика для\u00A0маркетплейсов",
+      about_badge: "ПОДХОД И\u00A0ОПЫТ",
+      about_title:
+        "Практичный дизайн с\u00A0опорой на\u00A0техническую экспертизу",
+      about_lead:
+        "От\u00A0пиксельной сетки в\u00A0диджитал до\u00A0физических материалов",
       about_text:
-        "Понимаю работу конверсии в вебе и нюансы реального производства. Создаю продуманные макеты: они привлекают клиентов в сети и без проблем встают на печать в типографиях или на сборку в рекламных цехах.",
-      btn_about_more: "Подробнее об авторе",
-      stat_1_label: "ЛЕТ В ДИЗАЙНЕ И ПРОИЗВОДСТВЕ",
-      stat_2_label: "ЛЕТ В PREPRESS И РЕКЛАМНЫХ ЦЕХАХ",
+        "Понимаю работу конверсии в\u00A0вебе и\u00A0нюансы реального производства. Создаю продуманные макеты: они привлекают клиентов в\u00A0сети и\u00A0без\u00A0проблем встают на\u00A0печать в\u00A0типографиях или\u00A0на\u00A0сборку в\u00A0рекламных цехах.",
+      btn_about_more: "Подробнее об\u00A0авторе",
+      stat_1_label: "ЛЕТ В\u00A0ДИЗАЙНЕ И\u00A0ПРОИЗВОДСТВЕ",
+      stat_2_label: "ЛЕТ В\u00A0PREPRESS И\u00A0РЕКЛАМНЫХ ЦЕХАХ",
       stat_3_label: "ПОЛНЫЙ КОНТРОЛЬ ЦВЕТООПИСАНИЯ",
-      footer_title: "Обсудим ваш проект и задачи бизнеса",
+      footer_title: "Обсудим ваш проект и\u00A0задачи бизнеса",
       footer_subtitle:
-        "Напишите мне любым удобным способом, чтобы рассчитать стоимость, сроки и технические нюансы реализации.",
-      footer_copy: "© 2026 Наталья Кочуланова. Все права защищены.",
+        "Напишите мне любым удобным способом, чтобы рассчитать стоимость, сроки и\u00A0технические нюансы реализации.",
+      footer_copy: "©\u00A02026 Наталья Кочуланова. Все права защищены.",
       dev_label: "Разработка сайта",
       modal_contact_title: "Обсудить проект",
       modal_contact_sub:
-        "Выберите направление и укажите контакт — я свяжусь с вами в течение 2-3 часов с оценкой сроков.",
+        "Выберите направление и\u00A0укажите контакт\u00A0— я\u00A0свяжусь с\u00A0вами в\u00A0течение 2–3\u00A0часов с\u00A0оценкой сроков.",
       label_direction: "Направление проекта",
       label_preferred_channel: "Предпочитаемый способ связи",
       chip_web: "Веб-сайт",
@@ -69,49 +87,49 @@ document.addEventListener("DOMContentLoaded", () => {
       placeholder_task: "Сроки, задачи, ссылки на референсы или ТЗ...",
       btn_submit_lead: "Отправить заявку",
       privacy_notice:
-        "Нажимая кнопку, вы подтверждаете согласие на конфиденциальную обработку контактных данных.",
+        "Нажимая кнопку, вы подтверждаете согласие на\u00A0конфиденциальную обработку контактных данных.",
       about_meta_edu: "Образование",
-      about_edu_1: "ЧГУ • ИЗО и черчение",
+      about_edu_1: "ЧГУ • ИЗО и\u00A0черчение",
       about_edu_2: "Школа «Логомашина» • Digital-дизайн",
-      about_meta_exp: "Опыт в индустрии",
-      about_exp_val: "20+ лет практики • 150+ проектов",
+      about_meta_exp: "Опыт в\u00A0индустрии",
+      about_exp_val: "20+\u00A0лет практики • 150+\u00A0проектов",
       about_role: "Графический & Digital-дизайнер • Prepress-эксперт",
       about_lead_full:
-        "Академическое художественное образование (ЧГУ) в сочетании с многолетним опытом в реальном производстве рекламных цехов и типографий.",
+        "Академическое художественное образование (ЧГУ) в\u00A0сочетании с\u00A0многолетним опытом в\u00A0реальном производстве рекламных цехов и\u00A0типографий.",
       about_text_full:
-        "Свободно объединяю технологические стандарты физических материалов (prepress, спуски полос, фрезеровка, плоттерная резка) с современным цифровым дизайном (UI/UX, Tilda Z-Block, инфографика, бизнес-презентации). Для генерации уникальных арт-активов и ускорения рутинных этапов активно использую Midjourney и ChatGPT.",
+        "Свободно объединяю технологические стандарты физических материалов (prepress, спуски полос, фрезеровка, плоттерная резка) с\u00A0современным цифровым дизайном (UI/UX, Tilda Z-Block, инфографика, бизнес-презентации). Для\u00A0генерации уникальных арт-активов и\u00A0ускорения рутинных этапов активно использую Midjourney и\u00A0ChatGPT.",
       about_skills_title: "Ключевые компетенции",
       about_card_1:
-        "Проектирование в Figma, верстка лендингов на Tilda, продающая инфографика и карточки для маркетплейсов, 150+ питч-деков и презентаций для EdTech и бизнеса.",
+        "Проектирование в\u00A0Figma, верстка лендингов на\u00A0Tilda, продающая инфографика и\u00A0карточки для\u00A0маркетплейсов, 150+\u00A0питч-деков и\u00A0презентаций для\u00A0EdTech и\u00A0бизнеса.",
       about_card_2:
-        "Владение Adobe Photoshop и CorelDRAW. Допечатная подготовка любой сложности под стандарты производств: CMYK, УФ-печать, плоттерная резка, точные контуры.",
+        "Владение Adobe Photoshop и\u00A0CorelDRAW. Допечатная подготовка любой сложности под\u00A0стандарты производств: CMYK, УФ-печать, плоттерная резка, точные контуры.",
       about_card_3_title: "Брендинг & Носители",
       about_card_3:
-        "Логотипы, бренд-константы, навигационные интерьерные системы, комплексный дизайн оформления фасадов и брендирования автотранспорта.",
+        "Логотипы, бренд-константы, навигационные интерьерные системы, комплексный дизайн оформления фасадов и\u00A0брендирования автотранспорта.",
       about_card_4_title: "Арт-дирекшн",
       about_card_4:
-        "Профессиональный контроль цвета, типографики и иерархии композиции, опыт руководства художественным отделением и кураторства выставочных экспозиций.",
+        "Профессиональный контроль цвета, типографики и\u00A0иерархии композиции, опыт руководства художественным отделением и\u00A0кураторства выставочных экспозиций.",
       about_work_title: "Опыт работы",
-      timeline_1_period: "2022 — настоящее время",
+      timeline_1_period: "2022\u00A0— настоящее время",
       timeline_1_role: "Digital-дизайнер / Фриланс",
       timeline_1_desc:
-        "Разработка коммерческой графики, сайтов на Tilda, баннеров и интерфейсов. Курс продуктового дизайна в «Логомашине» (2025–2026).",
-      timeline_palme_period: "2021 — 2022",
+        "Разработка коммерческой графики, сайтов на\u00A0Tilda, баннеров и\u00A0интерфейсов. Курс продуктового дизайна в\u00A0«Логомашине» (2025–2026).",
+      timeline_palme_period: "2021\u00A0— 2022",
       timeline_palme_role: "Graphic Designer / Palme School (Канада)",
       timeline_palme_desc:
-        "Создание 150+ презентаций по гайдлайнам, стилизация иллюстраций для канадской онлайн-школы.",
-      timeline_2_period: "2013 — 2026",
+        "Создание 150+\u00A0презентаций по\u00A0гайдлайнам, стилизация иллюстраций для\u00A0канадской онлайн-школы.",
+      timeline_2_period: "2013\u00A0— 2026",
       timeline_2_role:
         "Руководитель художественного отделения / Арт-консультант",
       timeline_2_desc:
-        "Руководство выставочной деятельностью и визуальным стилем крупных арт-событий. Экспертный контроль композиции и цветового пространства.",
-      timeline_3_period: "2002 — 2013",
+        "Руководство выставочной деятельностью и\u00A0визуальным стилем крупных арт-событий. Экспертный контроль композиции и\u00A0цветового пространства.",
+      timeline_3_period: "2002\u00A0— 2013",
       timeline_3_role:
-        "Дизайнер-технолог / Prepress-специалист (РА «Прорыв», ЗАО «ЦРТ»)",
+        "Дизайнер-технолог / Prepress-специалист (РА\u00A0«Прорыв», ЗАО\u00A0«ЦРТ»)",
       timeline_3_desc:
-        "Рекламная поддержка ХК «Северсталь» и сети «Мори-Синема». Проектирование наружной и интерьерной рекламы: от векторных чертежей до сборки в цехах и монтажа.",
-      about_tools_title: "Инструменты и технологии",
-      btn_discuss_author: "Обсудить проект с автором",
+        "Рекламная поддержка ХК\u00A0«Северсталь» и\u00A0сети «Мори-Синема». Проектирование наружной и\u00A0интерьерной рекламы: от\u00A0векторных чертежей до\u00A0сборки в\u00A0цехах и\u00A0монтажа.",
+      about_tools_title: "Инструменты и\u00A0технологии",
+      btn_discuss_author: "Обсудить проект с\u00A0автором",
     },
     en: {
       author_name: "Natalia Kochulanova",
@@ -121,49 +139,50 @@ document.addEventListener("DOMContentLoaded", () => {
       nav_contacts: "Contacts",
       btn_discuss: "Discuss Project",
       btn_contact: "Contact Me",
-      hero_title: "Comprehensive Design for Business: Identity to Websites",
+      hero_title:
+        "Comprehensive Design for\u00A0Business: Identity to\u00A0Websites",
       hero_subtitle:
-        "20+ years of expertise, academic art school background, and precision prepress. Creating visual solutions that help brands speak premium minimalism.",
+        "20+\u00A0years of\u00A0expertise, academic art school background, and\u00A0precision prepress. Creating visual solutions that help brands speak premium minimalism.",
       btn_portfolio: "Portfolio",
       services_title: "Services & Specialization",
       services_subtitle:
-        "Decades of design practice allowing turnkey delivery of complex visual solutions.",
+        "Decades of\u00A0design practice allowing turnkey delivery of\u00A0complex visual solutions.",
       service_1_text:
-        "UI/UX design, custom Tilda landing pages, and responsive websites engineered for all modern devices.",
+        "UI/UX design, custom Tilda landing pages, and\u00A0responsive websites engineered for\u00A0all modern devices.",
       service_2_title: "Branding & Identity",
       service_2_text:
-        "Unique brand marks, corporate identity systems, brand guidelines, and high-converting social media visual kits.",
+        "Unique brand marks, corporate identity systems, brand guidelines, and\u00A0high-converting social media visual kits.",
       service_3_title: "Presentations & Infographics",
       service_3_text:
-        "Investor pitch decks, commercial presentations for EdTech and enterprises, and e-commerce marketplace cards.",
+        "Investor pitch decks, commercial presentations for\u00A0EdTech and\u00A0enterprises, and\u00A0e-commerce marketplace cards.",
       service_4_title: "Print Design & Prepress",
       service_4_text:
-        "Marketing print collateral with strict production prepress matching technical printing house specifications.",
+        "Marketing print collateral with\u00A0strict production prepress matching technical printing house specifications.",
       portfolio_title: "Selected Works",
       portfolio_subtitle:
-        "Projects merging pure visual art, modern digital tech, and measurable commercial value.",
+        "Projects merging pure visual art, modern digital tech, and\u00A0measurable commercial value.",
       btn_see_all: "View Full Archive",
       proj_1_desc: "Premium website for architectural construction firm",
       proj_2_desc: "E-commerce fashion store concept",
       proj_3_desc: "Cosmetics brand identity & SMM direction",
       proj_4_desc: "High-converting marketplace product infographics",
       about_badge: "EXPERTISE & CRAFT",
-      about_title: "Results-driven design grounded in technical precision",
-      about_lead: "From digital pixel grid to tangible physical materials",
+      about_title: "Results-driven design grounded in\u00A0technical precision",
+      about_lead: "From digital pixel grid to\u00A0tangible physical materials",
       about_text:
-        "Mastering web conversion metrics and real-world printing facility nuances. Designing assets that captivate audiences online and run through production machinery without a hitch.",
+        "Mastering web conversion metrics and\u00A0real-world printing facility nuances. Designing assets that captivate audiences online and\u00A0run through production machinery without a\u00A0hitch.",
       btn_about_more: "Read Full Bio",
-      stat_1_label: "YEARS IN DESIGN & PRODUCTION",
-      stat_2_label: "YEARS IN PREPRESS & SIGNAGE SHOPS",
+      stat_1_label: "YEARS IN\u00A0DESIGN & PRODUCTION",
+      stat_2_label: "YEARS IN\u00A0PREPRESS & SIGNAGE SHOPS",
       stat_3_label: "FULL COLOR SPACE CONTROL",
       footer_title: "Let's discuss your next breakthrough project",
       footer_subtitle:
-        "Reach out via any channel below to get cost projections, timelines, and technical architecture.",
-      footer_copy: "© 2026 Natalia Kochulanova. All rights reserved.",
+        "Reach out via any channel below to\u00A0get cost projections, timelines, and\u00A0technical architecture.",
+      footer_copy: "©\u00A02026 Natalia Kochulanova. All rights reserved.",
       dev_label: "Crafted by",
-      modal_contact_title: "Start a Project",
+      modal_contact_title: "Start a\u00A0Project",
       modal_contact_sub:
-        "Select an area and leave your handle — I will get back within 2-3 hours with timeline estimates.",
+        "Select an\u00A0area and\u00A0leave your handle\u00A0— I\u00A0will get back within 2–3\u00A0hours with\u00A0timeline estimates.",
       label_direction: "Project Area",
       label_preferred_channel: "Preferred Communication Channel",
       chip_web: "Website",
@@ -180,42 +199,42 @@ document.addEventListener("DOMContentLoaded", () => {
       placeholder_task: "Scope, timelines, references, technical brief...",
       btn_submit_lead: "Send Inquiry",
       privacy_notice:
-        "By submitting, you consent to confidential processing of your contact details.",
+        "By submitting, you consent to\u00A0confidential processing of\u00A0your contact details.",
       about_meta_edu: "Education",
       about_edu_1: "ChSU • Fine Arts & Technical Drawing",
       about_edu_2: "Logomachine School • Digital Product Design",
       about_meta_exp: "Industry Track",
-      about_exp_val: "20+ years practice • 150+ completed projects",
+      about_exp_val: "20+\u00A0years practice • 150+\u00A0completed projects",
       about_role: "Graphic & Digital Designer • Prepress Specialist",
       about_lead_full:
-        "Academic fine arts degree paired with deep engineering production experience inside signage facilities and print houses.",
+        "Academic fine arts degree paired with\u00A0deep engineering production experience inside signage facilities and\u00A0print houses.",
       about_text_full:
-        "Seamlessly combining physical manufacturing rules (color separations, imposition, CNC milling, plotting) with digital interfaces (UI/UX, Tilda Z-Block, business slide decks). Integrating Midjourney and ChatGPT to generate proprietary visual assets and accelerate project turnarounds.",
+        "Seamlessly combining physical manufacturing rules (color separations, imposition, CNC milling, plotting) with\u00A0digital interfaces (UI/UX, Tilda Z-Block, business slide decks). Integrating Midjourney and\u00A0ChatGPT to\u00A0generate proprietary visual assets and\u00A0accelerate project turnarounds.",
       about_skills_title: "Core Competencies",
       about_card_1:
-        "Figma wireframing, Tilda Z-Block development, e-commerce marketplace infographics, and 150+ pitch presentations for EdTech and corporate clients.",
+        "Figma wireframing, Tilda Z-Block development, e-commerce marketplace infographics, and\u00A0150+\u00A0pitch presentations for\u00A0EdTech and\u00A0corporate clients.",
       about_card_2:
-        "Expert Adobe Photoshop & CorelDRAW commands. Flawless prepress for CMYK offset, UV printing, plot cutting, and exact vector contours.",
+        "Expert Adobe Photoshop & CorelDRAW commands. Flawless prepress for\u00A0CMYK offset, UV printing, plot cutting, and\u00A0exact vector contours.",
       about_card_3_title: "Branding & Wayfinding",
       about_card_3:
-        "Logos, brand books, interior navigation wayfinding, corporate facade transformations, and vehicle fleet wraps.",
+        "Logos, brand books, interior navigation wayfinding, corporate facade transformations, and\u00A0vehicle fleet wraps.",
       about_card_4_title: "Art Direction",
       about_card_4:
-        "Senior mastery over color hierarchy, typography scales, and composition, with past background leading an academic art division.",
+        "Senior mastery over color hierarchy, typography scales, and\u00A0composition, with\u00A0past background leading an\u00A0academic art division.",
       about_work_title: "Career Milestones",
-      timeline_1_period: "2022 — Present",
+      timeline_1_period: "2022\u00A0— Present",
       timeline_1_role: "Digital Designer / Independent",
       timeline_1_desc:
-        "Commercial web and visual assets, Tilda landing pages, and UI interfaces. Advanced product design certification at Logomachine (2025–2026).",
-      timeline_palme_period: "2021 — 2022",
+        "Commercial web and\u00A0visual assets, Tilda landing pages, and\u00A0UI interfaces. Advanced product design certification at\u00A0Logomachine (2025–2026).",
+      timeline_palme_period: "2021\u00A0— 2022",
       timeline_palme_role: "Graphic Designer / Palme School (Canada)",
       timeline_palme_desc:
-        "Production of 150+ brand-aligned presentations, custom illustration styling for a Canadian online school.",
-      timeline_2_period: "2013 — 2026",
+        "Production of\u00A0150+\u00A0brand-aligned presentations, custom illustration styling for\u00A0a\u00A0Canadian online school.",
+      timeline_2_period: "2013\u00A0— 2026",
       timeline_2_role: "Head of Fine Arts Department / Art Consultant",
       timeline_2_desc:
-        "Curating exhibition environments and brand visuals for major regional arts events. Rigorous oversight of color spaces and aesthetics.",
-      timeline_3_period: "2002 — 2013",
+        "Curating exhibition environments and\u00A0brand visuals for\u00A0major regional arts events. Rigorous oversight of\u00A0color spaces and\u00A0aesthetics.",
+      timeline_3_period: "2002\u00A0— 2013",
       timeline_3_role:
         "Production Designer / Prepress Lead (RA Proryv, CJSC CRT)",
       timeline_3_desc:
@@ -235,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (i18n[lang] && i18n[lang][key]) {
-        el.textContent = i18n[lang][key];
+        el.textContent = typograph(i18n[lang][key]);
       }
     });
 
