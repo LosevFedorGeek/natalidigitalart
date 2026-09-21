@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E0F12"/>
+      <stop offset="100%" stop-color="#16181C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="80%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#22C55E" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="card-border" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.03"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+    <line x1="100" y1="0" x2="100" y2="630"/>
+    <line x1="300" y1="0" x2="300" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="900" y1="0" x2="900" y2="630"/>
+    <line x1="1100" y1="0" x2="1100" y2="630"/>
+  </g>
+
+  <rect x="100" y="80" width="1000" height="470" rx="24" fill="#16181C" fill-opacity="0.8" stroke="url(#card-border)" stroke-width="1.5"/>
+
+  <rect x="150" y="130" width="310" height="38" rx="19" fill="#1F2127" stroke="#2D3039" stroke-width="1"/>
+  <circle cx="172" cy="149" r="4.5" fill="#22C55E"/>
+  <text x="188" y="154" fill="#9FA4AC" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="600" letter-spacing="1.5">UI/UX • IDENTITY • PREPRESS</text>
+
+  <text x="150" y="240" fill="#F8F7F4" font-family="'Forum', Georgia, serif" font-size="52" font-weight="400" letter-spacing="0.5">Наталья Кочуланова</text>
+  <text x="150" y="300" fill="#E4DED5" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="400">Комплексный коммерческий дизайн для бизнеса</text>
+  <text x="150" y="340" fill="#888D96" font-family="system-ui, -apple-system, sans-serif" font-size="17" font-weight="400">Сайты на Tilda, брендинг, продающая инфографика и Prepress с 2002 года</text>
+
+  <g transform="translate(150, 410)">
+    <rect x="0" y="0" width="240" height="80" rx="14" fill="#121316" stroke="#24262D" stroke-width="1"/>
+    <text x="24" y="44" fill="#F8F7F4" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="700">20+</text>
+    <text x="24" y="64" fill="#888D96" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">ЛЕТ В ИНДУСТРИИ</text>
+
+    <rect x="260" y="0" width="240" height="80" rx="14" fill="#121316" stroke="#24262D" stroke-width="1"/>
+    <text x="284" y="44" fill="#F8F7F4" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="700">150+</text>
+    <text x="284" y="64" fill="#888D96" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">КЕЙСОВ И ПРОЕКТОВ</text>
+
+    <rect x="520" y="0" width="260" height="80" rx="14" fill="#121316" stroke="#24262D" stroke-width="1"/>
+    <text x="544" y="44" fill="#22C55E" font-family="system-ui, -apple-system, sans-serif" font-size="30" font-weight="700">RGB / CMYK</text>
+    <text x="544" y="64" fill="#888D96" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" letter-spacing="0.5">ПРЕЦИЗИОННЫЙ PREPRESS</text>
+  </g>
+</svg>
