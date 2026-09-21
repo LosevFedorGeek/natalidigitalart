@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
       footer_subtitle:
         "Напишите мне любым удобным способом, чтобы рассчитать стоимость, сроки и\u00A0технические нюансы реализации.",
       footer_copy: "©\u00A02026 Наталья Кочуланова. Все права защищены.",
-      dev_label: "Разработка сайта",
       modal_contact_title: "Обсудить проект",
       modal_contact_sub:
         "Выберите направление и\u00A0укажите контакт\u00A0— я\u00A0свяжусь с\u00A0вами в\u00A0течение 2–3\u00A0часов с\u00A0оценкой сроков.",
@@ -179,7 +178,6 @@ document.addEventListener("DOMContentLoaded", () => {
       footer_subtitle:
         "Reach out via any channel below to\u00A0get cost projections, timelines, and\u00A0technical architecture.",
       footer_copy: "©\u00A02026 Natalia Kochulanova. All rights reserved.",
-      dev_label: "Crafted by",
       modal_contact_title: "Start a\u00A0Project",
       modal_contact_sub:
         "Select an\u00A0area and\u00A0leave your handle\u00A0— I\u00A0will get back within 2–3\u00A0hours with\u00A0timeline estimates.",
@@ -318,29 +316,171 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: true },
   );
 
-  const glowEl = document.getElementById("ambient-glow");
-  if (glowEl) {
-    let glowX = window.innerWidth / 2;
-    let glowY = window.innerHeight / 2;
-    let curGlowX = glowX;
-    let curGlowY = glowY;
+  const isFinePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)",
+  ).matches;
+
+  if (isFinePointer) {
+    let mouseX = -500;
+    let mouseY = -500;
+    let auraX = mouseX;
+    let auraY = mouseY;
+    let dotX = mouseX;
+    let dotY = mouseY;
+
+    const cursorDot = document.getElementById("cursor-dot");
+    const cursorAura = document.getElementById("cursor-aura");
 
     window.addEventListener(
       "mousemove",
       (e) => {
-        glowX = e.clientX;
-        glowY = e.clientY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        if (cursorDot) cursorDot.classList.remove("is-hidden");
+        if (cursorAura) cursorAura.classList.remove("is-hidden");
       },
       { passive: true },
     );
 
-    const updateGlow = () => {
-      curGlowX += (glowX - curGlowX) * 0.08;
-      curGlowY += (glowY - curGlowY) * 0.08;
-      glowEl.style.transform = `translate3d(${curGlowX.toFixed(1)}px, ${curGlowY.toFixed(1)}px, 0) translate(-50%, -50%)`;
-      requestAnimationFrame(updateGlow);
+    document.addEventListener("mouseleave", () => {
+      if (cursorDot) cursorDot.classList.add("is-hidden");
+      if (cursorAura) cursorAura.classList.add("is-hidden");
+    });
+
+    document.addEventListener("mousedown", () => {
+      if (cursorAura) {
+        cursorAura.style.setProperty("--cx", `${auraX.toFixed(1)}px`);
+        cursorAura.style.setProperty("--cy", `${auraY.toFixed(1)}px`);
+        cursorAura.classList.add("is-clicking");
+      }
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (cursorAura) cursorAura.classList.remove("is-clicking");
+    });
+
+    const interactiveSelectors =
+      "a, button, input, textarea, .service-card, .project-card, .chip, .channel-tab, .theme-toggle, .lang-btn, .burger-btn";
+
+    document.querySelectorAll(interactiveSelectors).forEach((el) => {
+      el.addEventListener("mouseenter", () => {
+        if (cursorAura) cursorAura.classList.add("is-hovering");
+        if (cursorDot) cursorDot.classList.add("is-hovering");
+      });
+      el.addEventListener("mouseleave", () => {
+        if (cursorAura) cursorAura.classList.remove("is-hovering");
+        if (cursorDot) cursorDot.classList.remove("is-hovering");
+      });
+    });
+
+    const magneticElements = Array.from(
+      document.querySelectorAll("[data-magnetic]"),
+    ).map((el) => ({
+      el,
+      x: 0,
+      y: 0,
+      targetX: 0,
+      targetY: 0,
+    }));
+
+    const tiltCards = Array.from(
+      document.querySelectorAll(".service-card, .project-card, .tilt-target"),
+    ).map((el) => ({
+      el,
+      rx: 0,
+      ry: 0,
+      targetRx: 0,
+      targetRy: 0,
+    }));
+
+    const renderPhysics = () => {
+      dotX += (mouseX - dotX) * 0.75;
+      dotY += (mouseY - dotY) * 0.75;
+      auraX += (mouseX - auraX) * 0.16;
+      auraY += (mouseY - auraY) * 0.16;
+
+      if (cursorDot) {
+        cursorDot.style.transform = `translate3d(${dotX.toFixed(1)}px, ${dotY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      }
+      if (cursorAura) {
+        cursorAura.style.transform = `translate3d(${auraX.toFixed(1)}px, ${auraY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      }
+
+      magneticElements.forEach((item) => {
+        const rect = item.el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
+        const dist = Math.hypot(dx, dy);
+        const radius = Math.max(rect.width, rect.height) * 0.8;
+
+        if (dist < radius) {
+          const power = Math.pow(1 - dist / radius, 1.6);
+          item.targetX = dx * power * 0.08;
+          item.targetY = dy * power * 0.08;
+        } else {
+          item.targetX = 0;
+          item.targetY = 0;
+        }
+
+        item.x += (item.targetX - item.x) * 0.15;
+        item.y += (item.targetY - item.y) * 0.15;
+
+        if (Math.abs(item.x) > 0.01 || Math.abs(item.y) > 0.01) {
+          item.el.style.transform = `translate3d(${item.x.toFixed(2)}px, ${item.y.toFixed(2)}px, 0)`;
+        } else {
+          item.el.style.transform = "";
+        }
+      });
+
+      tiltCards.forEach((item) => {
+        const rect = item.el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
+        const buffer = 36;
+
+        if (
+          mouseX >= rect.left - buffer &&
+          mouseX <= rect.right + buffer &&
+          mouseY >= rect.top - buffer &&
+          mouseY <= rect.bottom + buffer
+        ) {
+          const maxW = rect.width / 2 + buffer;
+          const maxH = rect.height / 2 + buffer;
+          const nx = Math.max(-1, Math.min(1, dx / maxW));
+          const ny = Math.max(-1, Math.min(1, dy / maxH));
+
+          item.targetRx = -ny * 1.8;
+          item.targetRy = nx * 1.8;
+
+          const innerX = mouseX - rect.left;
+          const innerY = mouseY - rect.top;
+          item.el.style.setProperty("--mouse-x", `${innerX.toFixed(1)}px`);
+          item.el.style.setProperty("--mouse-y", `${innerY.toFixed(1)}px`);
+          item.el.classList.add("is-proximity");
+        } else {
+          item.targetRx = 0;
+          item.targetRy = 0;
+          item.el.classList.remove("is-proximity");
+        }
+
+        item.rx += (item.targetRx - item.rx) * 0.1;
+        item.ry += (item.targetRy - item.ry) * 0.1;
+
+        if (Math.abs(item.rx) > 0.01 || Math.abs(item.ry) > 0.01) {
+          item.el.style.transform = `perspective(1000px) rotateX(${item.rx.toFixed(2)}deg) rotateY(${item.ry.toFixed(2)}deg)`;
+        } else {
+          item.el.style.transform = "";
+        }
+      });
+
+      requestAnimationFrame(renderPhysics);
     };
-    updateGlow();
+
+    requestAnimationFrame(renderPhysics);
   }
 
   const reveals = document.querySelectorAll(".reveal");
@@ -354,7 +494,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       },
-      { threshold: 0.05, rootMargin: "0px 0px 80px 0px" },
+      { threshold: 0.05, rootMargin: "0px 0px 60px 0px" },
     );
 
     reveals.forEach((el) => {
@@ -379,7 +519,7 @@ document.addEventListener("DOMContentLoaded", () => {
           countersTriggered = true;
           counters.forEach((counter) => {
             const target = +counter.getAttribute("data-target");
-            const duration = 1600;
+            const duration = 1400;
             const start = performance.now();
 
             const updateNumber = (time) => {
@@ -406,139 +546,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const aboutSection = document.querySelector(".about");
   if (aboutSection) counterObserver.observe(aboutSection);
-
-  const isDesktop = window.matchMedia(
-    "(hover: hover) and (pointer: fine)",
-  ).matches;
-
-  if (isDesktop) {
-    let mouseX = -10000;
-    let mouseY = -10000;
-
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      },
-      { passive: true },
-    );
-
-    const magneticElements = Array.from(
-      document.querySelectorAll("[data-magnetic]"),
-    ).map((el) => ({
-      el,
-      x: 0,
-      y: 0,
-      targetX: 0,
-      targetY: 0,
-      scale: 1,
-      targetScale: 1,
-    }));
-
-    const tiltCards = Array.from(
-      document.querySelectorAll(".service-card, .project-card, .tilt-target"),
-    ).map((el) => ({
-      el,
-      rx: 0,
-      ry: 0,
-      tz: 0,
-      targetRx: 0,
-      targetRy: 0,
-      targetTz: 0,
-    }));
-
-    const updatePhysics = () => {
-      magneticElements.forEach((item) => {
-        const rect = item.el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = mouseX - cx;
-        const dy = mouseY - cy;
-        const dist = Math.hypot(dx, dy);
-        const radius = Math.max(rect.width, rect.height) * 1.6;
-
-        if (dist < radius) {
-          const power = Math.pow(1 - dist / radius, 1.4);
-          item.targetX = dx * power * 0.22;
-          item.targetY = dy * power * 0.22;
-          item.targetScale = 1 + power * 0.025;
-        } else {
-          item.targetX = 0;
-          item.targetY = 0;
-          item.targetScale = 1;
-        }
-
-        item.x += (item.targetX - item.x) * 0.1;
-        item.y += (item.targetY - item.y) * 0.1;
-        item.scale += (item.targetScale - item.scale) * 0.1;
-
-        if (
-          Math.abs(item.x) > 0.01 ||
-          Math.abs(item.y) > 0.01 ||
-          Math.abs(item.scale - 1) > 0.001
-        ) {
-          item.el.style.transform = `translate3d(${item.x.toFixed(2)}px, ${item.y.toFixed(2)}px, 0) scale(${item.scale.toFixed(3)})`;
-        } else {
-          item.el.style.transform = "";
-        }
-      });
-
-      tiltCards.forEach((item) => {
-        const rect = item.el.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = mouseX - cx;
-        const dy = mouseY - cy;
-        const buffer = 100;
-
-        if (
-          mouseX >= rect.left - buffer &&
-          mouseX <= rect.right + buffer &&
-          mouseY >= rect.top - buffer &&
-          mouseY <= rect.bottom + buffer
-        ) {
-          const maxW = rect.width / 2 + buffer;
-          const maxH = rect.height / 2 + buffer;
-          const nx = Math.max(-1, Math.min(1, dx / maxW));
-          const ny = Math.max(-1, Math.min(1, dy / maxH));
-
-          item.targetRx = -ny * 4;
-          item.targetRy = nx * 4;
-          item.targetTz = -3;
-
-          const innerX = mouseX - rect.left;
-          const innerY = mouseY - rect.top;
-          item.el.style.setProperty("--mouse-x", `${innerX.toFixed(1)}px`);
-          item.el.style.setProperty("--mouse-y", `${innerY.toFixed(1)}px`);
-          item.el.classList.add("is-proximity");
-        } else {
-          item.targetRx = 0;
-          item.targetRy = 0;
-          item.targetTz = 0;
-          item.el.classList.remove("is-proximity");
-        }
-
-        item.rx += (item.targetRx - item.rx) * 0.09;
-        item.ry += (item.targetRy - item.ry) * 0.09;
-        item.tz += (item.targetTz - item.tz) * 0.09;
-
-        if (
-          Math.abs(item.rx) > 0.01 ||
-          Math.abs(item.ry) > 0.01 ||
-          Math.abs(item.tz) > 0.01
-        ) {
-          item.el.style.transform = `perspective(1000px) rotateX(${item.rx.toFixed(2)}deg) rotateY(${item.ry.toFixed(2)}deg) translate3d(0, ${item.tz.toFixed(2)}px, 0)`;
-        } else {
-          item.el.style.transform = "";
-        }
-      });
-
-      requestAnimationFrame(updatePhysics);
-    };
-
-    requestAnimationFrame(updatePhysics);
-  }
 
   const heroSlider = document.getElementById("hero-slider");
   if (heroSlider) {
@@ -663,7 +670,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const channelTabs = document.querySelectorAll("#channel-tabs .channel-tab");
   const channelInput = document.getElementById("selected-channel");
   const contactInput = document.getElementById("user-contact");
-  const contactLabel = document.getElementById("contact-label");
 
   channelTabs.forEach((tab) => {
     tab.addEventListener("click", () => {
@@ -675,11 +681,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (channelInput) channelInput.value = channelName;
       if (contactInput) contactInput.placeholder = placeholder;
-      if (contactLabel)
-        contactLabel.textContent =
-          currentLang === "en"
-            ? `${channelName} Contact *`
-            : `Ваш ${channelName} *`;
     });
   });
 
@@ -692,14 +693,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const isOpen = mobileNav.classList.toggle("is-open");
       burgerBtn.classList.toggle("is-active", isOpen);
       burgerBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      mobileNav.setAttribute("aria-hidden", isOpen ? "false" : "true");
       document.body.style.overflow = isOpen ? "hidden" : "";
+      document.documentElement.style.overflow = isOpen ? "hidden" : "";
     };
 
     const closeMenu = () => {
       mobileNav.classList.remove("is-open");
       burgerBtn.classList.remove("is-active");
       burgerBtn.setAttribute("aria-expanded", "false");
+      mobileNav.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     };
 
     burgerBtn.addEventListener("click", toggleMenu);
@@ -728,10 +733,12 @@ document.addEventListener("DOMContentLoaded", () => {
       mobileNav.classList.remove("is-open");
       burgerBtn.classList.remove("is-active");
       burgerBtn.setAttribute("aria-expanded", "false");
+      mobileNav.setAttribute("aria-hidden", "true");
     }
     targetModal.classList.add("is-open");
     targetModal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
   };
 
   const closeModal = (targetModal) => {
@@ -747,6 +754,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const anyStillOpen = document.querySelector(".modal.is-open");
     if (!anyStillOpen) {
       document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
     }
   };
 
@@ -783,17 +791,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitBtn = leadForm ? leadForm.querySelector(".modal__submit") : null;
 
   const resetModalInteractions = () => {
-    const chips = document.querySelectorAll("#service-chips .chip");
     chips.forEach((c, idx) => c.classList.toggle("is-active", idx === 0));
-    const serviceInput = document.getElementById("selected-service");
     if (serviceInput) serviceInput.value = "Веб-сайт";
 
-    const channelTabs = document.querySelectorAll("#channel-tabs .channel-tab");
     channelTabs.forEach((t, idx) => t.classList.toggle("is-active", idx === 0));
-    const channelInput = document.getElementById("selected-channel");
     if (channelInput) channelInput.value = "Telegram";
 
-    const contactInput = document.getElementById("user-contact");
     if (contactInput) contactInput.placeholder = "@username или телефон";
   };
 
@@ -874,13 +877,7 @@ document.addEventListener("DOMContentLoaded", () => {
         resetModalInteractions();
 
         setTimeout(() => {
-          if (typeof closeModal === "function") {
-            closeModal(contactModal);
-          } else if (contactModal) {
-            contactModal.classList.remove("is-open");
-            contactModal.setAttribute("aria-hidden", "true");
-            document.body.style.overflow = "";
-          }
+          closeModal(contactModal);
           statusDiv.textContent = "";
           statusDiv.className = "form-status";
         }, 2000);
